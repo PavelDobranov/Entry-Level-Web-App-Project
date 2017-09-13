@@ -7,7 +7,7 @@ const envConfig = {
   }
 };
 
-const getEnvConfig = (env) => envConfig[env]
+const getEnvConfig = (env) => envConfig[env];
 
 export default {
   port: process.env.PORT || 3000,
