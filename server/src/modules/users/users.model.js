@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { hashSync } from 'bcrypt-nodejs';
 
 const UserSchema = new Schema({
   nickname: {
@@ -25,10 +26,21 @@ const UserSchema = new Schema({
 }, { timestamps: true });
 
 UserSchema.methods = {
+  _hashPassword(password) {
+    return hashSync(password);
+  },
   toJSON() {
     const { _id, nickname, email, phone } = this;
     return { _id, nickname, email, phone };
   }
 };
+
+UserSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    this.password = this._hashPassword(this.password);
+  }
+
+  return next();
+});
 
 export default mongoose.model('User', UserSchema);
