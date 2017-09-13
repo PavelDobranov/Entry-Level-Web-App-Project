@@ -1,9 +1,11 @@
 const envConfig = {
   development: {
-    dbConnectionString: 'mongodb://localhost/entrylevelwebapp-dev'
+    dbConnectionString: 'mongodb://localhost/entrylevelwebapp-dev',
+    jwtSecret: 'entrylevelwebappsecret-dev'
   },
   production: {
-    dbConnectionString: 'mongodb://localhost/entrylevelwebapp-prod'
+    dbConnectionString: 'mongodb://localhost/entrylevelwebapp-prod',
+    jwtSecret: 'entrylevelwebappsecret-prod'
   }
 };
 

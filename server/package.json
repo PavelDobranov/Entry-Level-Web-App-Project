@@ -19,7 +19,10 @@
     "express-validation": "^1.0.2",
     "http-status": "^1.0.1",
     "joi": "^10.6.0",
-    "mongoose": "^4.11.11"
+    "jsonwebtoken": "^8.0.1",
+    "mongoose": "^4.11.11",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

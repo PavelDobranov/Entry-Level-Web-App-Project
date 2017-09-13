@@ -21,29 +21,55 @@ export const validations = {
   }
 };
 
-export const getAll = async (req, res) => {
-  try {
-    const dbUsers = await Users.find();
-
-    return res.status(httpStatus.OK).json(dbUsers);
-  } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json(error);
-  }
-};
-
 export const create = async (req, res) => {
   try {
     const dbUser = await Users.create(req.body);
 
     return res.status(httpStatus.CREATED).json(dbUser);
   } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json(error);
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { nickname, password } = req.body;
+
+    const dbUser = await Users.findOne({ nickname });
+
+    if (!dbUser) {
+      return res.status(httpStatus.NOT_FOUND).json('User not found!');
+    }
+
+    if (!dbUser.authenticate(password)) {
+      return res.status(httpStatus.BAD_REQUEST).json('Passwords did not match!');
+    }
+
+    const token = `JWT ${dbUser.createToken()}`;
+
+    return res.status(httpStatus.OK).json({ ...dbUser.toJSON(), token });
+  } catch (error) {
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+};
+
+export const getById = async (req, res) => {
+  try {
+    const dbUser = await Users.findById(req.params.id);
+
+    if (!dbUser) {
+      return res.status(httpStatus.NOT_FOUND).json('User not found!');
+    }
+
+    return res.status(httpStatus.OK).json(dbUser);
+  } catch (error) {
+    return res.status(httpStatus.BAD_REQUEST).json(error);
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const dbUser = await Users.findOne({ _id: req.params.id });
+    const dbUser = await Users.findById(req.params.id);
 
     Object.keys(req.body).forEach(key => {
       dbUser[key] = req.body[key];
@@ -53,6 +79,6 @@ export const update = async (req, res) => {
 
     return res.status(httpStatus.OK).json(updatedUser);
   } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json(error);
+    return res.status(httpStatus.BAD_REQUEST).json(error);
   }
 };
