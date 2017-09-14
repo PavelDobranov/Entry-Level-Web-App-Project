@@ -5,7 +5,7 @@ import env from '../config/env.config';
 import Users from '../modules/users/users.model';
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('jwt'),
   secretOrKey: env.jwtSecret
 };
 
