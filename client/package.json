@@ -1,0 +1,12 @@
+{
+  "name": "entry-level-web-app-client",
+  "version": "0.0.1",
+  "description": "entry level web app project",
+  "repository": "https://github.com/PavelDobranov/Entry-Level-Web-App-Project.git",
+  "author": "Pavel Dobranov <pdobranov@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-ui-router": "^1.0.3"
+  }
+}
