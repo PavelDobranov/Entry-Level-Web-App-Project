@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <form class="form-horizontal">
+      <fieldset>
+        <legend class="text-center">Create new account</legend>
+        <div class="form-group">
+          <label class="control-label" for="nicknameInput">Nickname</label>
+          <input ng-model="$ctrl.user.nickname"class="form-control" id="nicknameInput" type="text" placeholder="Pick a nickname">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="emailInput">Email</label>
+          <input ng-model="$ctrl.user.email" class="form-control" id="emailInput" type="text" placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="passwordInput">Password</label>
+          <input ng-model="$ctrl.user.password" class="form-control" id="passwordInput" type="text" placeholder="Create a password">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="confirmPasswordInput">Confirm password</label>
+          <input ng-model="$ctrl.user.confirmPassword" class="form-control" id="confirmPasswordInput" type="text" placeholder="Confirm your password">
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="phoneInput">Phone</label>
+          <input ng-model="$ctrl.user.phone" class="form-control" id="phoneInput" type="text" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+          <dutton ng-click="$ctrl.registerUser();" class="btn btn-success btn-lg btn-block">Create Account</dutton>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
