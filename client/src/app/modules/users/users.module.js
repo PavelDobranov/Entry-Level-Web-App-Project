@@ -11,4 +11,5 @@ export const users = angular
     $stateProvider
       .state('register', { url: '/register', component: 'register' });
   })
+  .constant('apiUrl', 'http://localhost:3030/api/users')
   .name;
