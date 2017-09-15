@@ -12,6 +12,6 @@ const envConfig = {
 const getEnvConfig = (env) => envConfig[env];
 
 export default {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3030,
   ...getEnvConfig(process.env.NODE_ENV)
 };
