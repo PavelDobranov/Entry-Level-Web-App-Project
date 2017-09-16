@@ -1,30 +1,76 @@
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
-    <form class="form-horizontal">
+    <form novalidate name="registerForm" class="form-horizontal">
       <fieldset>
         <legend class="text-center">Create new account</legend>
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{ 'has-error': !registerForm.nickname.$valid && registerForm.nickname.$touched,
+                         'has-success': registerForm.nickname.$valid && registerForm.nickname.$touched }">
           <label class="control-label" for="nicknameInput">Nickname</label>
-          <input ng-model="$ctrl.user.nickname"class="form-control" id="nicknameInput" type="text" placeholder="Pick a nickname">
+          <input type="text"
+                 id="nicknameInput"
+                 name="nickname"
+                 class="form-control"
+                 ng-model="$ctrl.user.nickname"
+                 ng-required="true"
+                 ng-minlength="3"
+                 ng-maxlength="40"
+                 placeholder="Pick a nickname">
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{ 'has-error': !registerForm.email.$valid && registerForm.email.$touched,
+                         'has-success': registerForm.email.$valid && registerForm.email.$touched }">
           <label class="control-label" for="emailInput">Email</label>
-          <input ng-model="$ctrl.user.email" class="form-control" id="emailInput" type="text" placeholder="you@example.com">
+          <input type="email"
+                 id="emailInput"
+                 name="email"
+                 class="form-control"
+                 ng-model="$ctrl.user.email"
+                 ng-required="true"
+                 placeholder="you@example.com">
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{ 'has-error': !registerForm.password.$valid && registerForm.password.$touched,
+                         'has-success': registerForm.password.$valid && registerForm.password.$touched }">
           <label class="control-label" for="passwordInput">Password</label>
-          <input ng-model="$ctrl.user.password" class="form-control" id="passwordInput" type="text" placeholder="Create a password">
+          <input type="password"
+                 id="passwordInput"
+                 name="password"
+                 class="form-control"
+                 ng-model="$ctrl.user.password"
+                 ng-required="true"
+                 placeholder="Creat a password">
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{ 'has-error': !registerForm.confirmPassword.$valid && registerForm.confirmPassword.$touched,
+                         'has-success': registerForm.confirmPassword.$valid && registerForm.confirmPassword.$touched }">
           <label class="control-label" for="confirmPasswordInput">Confirm password</label>
-          <input ng-model="$ctrl.user.confirmPassword" class="form-control" id="confirmPasswordInput" type="text" placeholder="Confirm your password">
+          <input type="password"
+                 id="confirmPasswordInput"
+                 name="confirmPassword"
+                 class="form-control"
+                 ng-model="$ctrl.user.confirmPassword"
+                 ng-required="true"
+                 placeholder="Confirm your password">
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             ng-class="{ 'has-error': !registerForm.phone.$valid && registerForm.phone.$touched,
+                         'has-success': registerForm.phone.$valid && registerForm.phone.$touched }">
           <label class="control-label" for="phoneInput">Phone</label>
-          <input ng-model="$ctrl.user.phone" class="form-control" id="phoneInput" type="text" placeholder="Enter your phone number">
+          <input type="number"
+                 id="phoneInput"
+                 name="phone"
+                 class="form-control"
+                 ng-model="$ctrl.user.phone"
+                 ng-required="true"
+                 placeholder="Enter your phone number">
         </div>
         <div class="form-group">
-          <dutton ng-click="$ctrl.registerUser();" class="btn btn-success btn-lg btn-block">Create Account</dutton>
+          <dutton ng-click="$ctrl.registerUser();"
+                  ng-disabled="registerForm.$invalid"
+                  class="btn btn-success btn-lg btn-block">
+            Create Account
+          </dutton>
         </div>
       </fieldset>
     </form>
