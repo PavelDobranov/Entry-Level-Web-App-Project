@@ -15,7 +15,6 @@ export const validations = {
   update: {
     body: {
       nickname: joi.string().min(3).max(40),
-      password: joi.string().min(6).max(40),
       phone: joi.number().integer()
     }
   }
@@ -69,13 +68,7 @@ export const getById = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const dbUser = await Users.findById(req.params.id);
-
-    Object.keys(req.body).forEach(key => {
-      dbUser[key] = req.body[key];
-    });
-
-    const updatedUser = await dbUser.save();
+    const updatedUser = await Users.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
 
     return res.status(httpStatus.OK).json(updatedUser);
   } catch (error) {

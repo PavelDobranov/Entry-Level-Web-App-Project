@@ -1,7 +1,8 @@
 export class UsersDataService {
-  constructor($http, $q, apiUrl) {
+  constructor($http, $q, localStorageService, apiUrl) {
     this.$http = $http;
     this.$q = $q;
+    this.localStorageService = localStorageService;
     this.apiUrl = apiUrl;
   }
 
@@ -22,8 +23,14 @@ export class UsersDataService {
     const deferred = this.$q.defer();
 
     this.$http
-      .post(updateUserendpoint, credentials)
-      .then(deferred.resolve)
+      .put(updateUserendpoint, updatedUser)
+      .then((response) => {
+        const { data: user } = response;
+
+        this.localStorageService.set('user', user);
+
+        deferred.resolve(user);
+      })
       .catch(deferred.reject);
 
     return deferred.promise;
