@@ -1,4 +1,4 @@
-export class UsersDataService {
+export default class UsersDataService {
   constructor($http, $q, localStorageService, apiUrl) {
     this.$http = $http;
     this.$q = $q;

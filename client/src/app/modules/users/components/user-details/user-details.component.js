@@ -1,27 +1,27 @@
 import templateUrl from './user-details.html';
 
 class UserDetailsController {
-  constructor($stateParams, UsersDataService) {
+  constructor($stateParams, usersDataService) {
     this.userId = $stateParams.id;
-    this.UsersDataService = UsersDataService;
+    this.usersDataService = usersDataService;
   }
 
   $onInit() {
-    this.UsersDataService
+    this.usersDataService
       .getUser(this.userId)
       .then((user) => this.user = user)
       .catch(error => console.log);
   }
 
   updateUser() {
-    this.UsersDataService
+    this.usersDataService
       .updateUser(this.userId, this.user)
       .then(console.log)
       .catch(console.log);
   }
 }
 
-export const userDetailsComponent = {
+export default {
   templateUrl,
   controller: UserDetailsController
 };

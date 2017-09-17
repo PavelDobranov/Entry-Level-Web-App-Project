@@ -1,9 +1,9 @@
 import templateUrl from './register.html';
 
 class RegisterController {
-  constructor($state, AuthService) {
+  constructor($state, authService) {
     this.$state = $state;
-    this.AuthService = AuthService;
+    this.authService = authService;
   }
 
   $onInit() {
@@ -19,13 +19,13 @@ class RegisterController {
   registerUser() {
     // TODO: validate
 
-    this.AuthService
+    this.authService
       .register(this.user)
       .then(console.log);
   }
 }
 
-export const registerComponent = {
+export default {
   templateUrl,
   controller: RegisterController
 };

@@ -1,4 +1,4 @@
-export class IdentityService {
+export default class IdentityService {
   constructor(localStorageService) {
     this.localStorageService = localStorageService;
   }

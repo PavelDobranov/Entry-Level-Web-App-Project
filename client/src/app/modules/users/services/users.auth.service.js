@@ -1,8 +1,8 @@
-export class AuthService {
-  constructor($http, $q, IdentityService, apiUrl) {
+export default class AuthService {
+  constructor($http, $q, identityService, apiUrl) {
     this.$http = $http;
     this.$q = $q;
-    this.IdentityService = IdentityService;
+    this.identityService = identityService;
     this.apiUrl = apiUrl;
   }
 
@@ -27,7 +27,7 @@ export class AuthService {
       .then((response) => {
         const { data: user } = response;
 
-        this.IdentityService.setLoggedUser(user);
+        this.identityService.setLoggedUser(user);
         this.$http.defaults.headers.common.Authorization = user.token;
 
         deferred.resolve(user);
