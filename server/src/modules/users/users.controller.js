@@ -60,7 +60,7 @@ export const getById = async (req, res) => {
       return res.status(httpStatus.NOT_FOUND).json('User not found!');
     }
 
-    return res.status(httpStatus.OK).json(dbUser);
+    return res.status(httpStatus.OK).json(dbUser.toFullJSON());
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).json(error);
   }

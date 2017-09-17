@@ -38,9 +38,13 @@ UserSchema.methods = {
   createToken() {
     return jwt.sign({ _id: this._id }, env.jwtSecret);
   },
-  toJSON() {
+  toFullJSON() {
     const { _id, nickname, email, phone } = this;
     return { _id, nickname, email, phone };
+  },
+  toJSON() {
+    const { _id, nickname } = this;
+    return { _id, nickname };
   }
 };
 
