@@ -16,12 +16,16 @@ class UserDetailsController {
   updateUser() {
     this.usersDataService
       .updateUser(this.userId, this.user)
-      .then(console.log)
+      .then((user) => {
+        const { _id, nickname } = user;
+        this.mainComponent.setUser({ _id, nickname });
+      })
       .catch(console.log);
   }
 }
 
 export default {
   templateUrl,
+  require: { mainComponent: '^^main' },
   controller: UserDetailsController
 };

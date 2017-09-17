@@ -9,7 +9,8 @@ import appHeaderComponent from './components/app-header/app-header.component';
 import appFooterComponent from './components/app-footer/app-footer.component';
 import pageNotFoundComponent from './components/page-not-found/page-not-found.component';
 import usersModule from './modules/users/users.module';
-import appConfig from './app.module.config';
+import { routes, hooks } from './app.module.config';
+import '../css/app.css';
 
 export default angular
   .module('app', [uiRouter, localStorage, usersModule])
@@ -18,5 +19,6 @@ export default angular
   .component('appHeader', appHeaderComponent)
   .component('appFooter', appFooterComponent)
   .component('pageNotFound', pageNotFoundComponent)
-  .config(appConfig)
+  .config(routes)
+  .run(hooks)
   .name;

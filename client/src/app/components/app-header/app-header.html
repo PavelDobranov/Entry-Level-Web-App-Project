@@ -1,3 +1,23 @@
-<header class="page-header">
-  <h1>App Header</h1>
-</header>
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a ng-href="/user/{{ $ctrl.user._id }}">User Details</a>
+      </li>
+    </ul>
+  </div>
+  <div ng-if="!$ctrl.user" class="navbar-btn navbar-right">
+    <a href="/login" class="btn btn-sm btn-default">Login</a>
+    <a href="/register" class="btn btn-sm btn-default">Register</a>
+  </div>
+  <div ng-if="$ctrl.user" class="navbar-btn navbar-right">
+    <small>
+      <span class="glyphicon glyphicon-user"></span>
+      {{ $ctrl.user.nickname }}
+    </small>
+    <button ng-click="$ctrl.logout();" class="btn btn-sm btn-default">Logout</button>
+  </div>
+</nav>

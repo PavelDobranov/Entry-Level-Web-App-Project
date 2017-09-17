@@ -1,7 +1,8 @@
 import templateUrl from './login.html';
 
 class LoginController {
-  constructor($state, authService) {
+  constructor($scope, $state, authService) {
+    this.$scope = $scope;
     this.$state = $state;
     this.authService = authService;
   }
@@ -13,12 +14,18 @@ class LoginController {
   loginUser() {
     this.authService
       .login(this.credentials)
-      .then((user) => this.$state.go('userDetails', { id: user._id }))
+      .then((user) => {
+        const { _id, nickname } = user;
+        this.mainComponent.setUser({ _id, nickname });
+
+        this.$state.transitionTo('home')
+      })
       .catch(console.log);
   }
 }
 
 export default {
   templateUrl,
-  controller: LoginController
+  require: { mainComponent: '^^main' },
+  controller: LoginController,
 };

@@ -1,3 +1,8 @@
 import templateUrl from './app-header.html';
 
-export default { templateUrl };
+const bindings = {
+  user: '<',
+  logout: '&'
+};
+
+export default { templateUrl, bindings };

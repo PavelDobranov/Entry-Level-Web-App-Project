@@ -36,4 +36,14 @@ export default class AuthService {
 
     return deferred.promise;
   }
+
+  logout() {
+    const deferred = this.$q.defer();
+
+    this.$http.defaults.headers.common.Authorization = null;
+    this.identityService.removeLoggedUser();
+    deferred.resolve(true);
+
+    return deferred.promise;
+  }
 }
