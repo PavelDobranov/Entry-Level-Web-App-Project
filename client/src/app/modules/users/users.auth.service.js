@@ -1,8 +1,8 @@
 export class AuthService {
-  constructor($http, $q, localStorageService, apiUrl) {
+  constructor($http, $q, IdentityService, apiUrl) {
     this.$http = $http;
     this.$q = $q;
-    this.localStorageService = localStorageService;
+    this.IdentityService = IdentityService;
     this.apiUrl = apiUrl;
   }
 
@@ -13,7 +13,7 @@ export class AuthService {
     this.$http
       .post(registerEnpoint, user)
       .then(deferred.resolve)
-      .catch(deferred.reject)
+      .catch(deferred.reject);
 
     return deferred.promise;
   }
@@ -25,9 +25,10 @@ export class AuthService {
     this.$http
       .post(loginEndpoint, credentials)
       .then((response) => {
-        const { token, ...user } = response.data;
+        const { data: user } = response;
 
-        this.localStorageService.set('access-token', token);
+        this.IdentityService.setLoggedUser(user);
+        this.$http.defaults.headers.common.Authorization = user.token;
 
         deferred.resolve(user);
       })

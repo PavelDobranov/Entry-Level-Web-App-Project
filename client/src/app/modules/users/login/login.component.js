@@ -7,15 +7,13 @@ class LoginController {
   }
 
   $onInit() {
-    this.credentials = { nickname: '', password: '' };
+    this.credentials = { nickname: 'pdobranov', password: 'fixedgear4095' };
   }
 
   loginUser() {
-    // TODO: validate
-
     this.AuthService
       .login(this.credentials)
-      .then(console.log);
+      .then((user) => this.$state.go('userDetails', { id: user._id }));
   }
 }
 
