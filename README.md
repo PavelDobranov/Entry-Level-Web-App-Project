@@ -10,18 +10,18 @@
 
     - `npm install`
 
-    - `npm start build`
+    - `npm run build`
 
-    - `npm start dev`
+    - `npm run dev`
 
 #### Client
 - Navigate the terminal to the `/client` folder
 
     - `npm install`
 
-    - `npm start build`
+    - `npm run build`
 
-    - `npm start dev`
+    - `npm run dev`
 
 ---
 
