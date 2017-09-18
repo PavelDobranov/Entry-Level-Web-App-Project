@@ -56,11 +56,15 @@ export const login = async (req, res) => {
 };
 
 export const getById = async (req, res) => {
+  if (req.user && (req.user._id.toString() !== req.params.id.toString())) {
+    return res.status(httpStatus.NON_AUTHORITATIVE_INFORMATION).json({ message: 'Non authoritative information' });
+  }
+
   try {
     const dbUser = await Users.findById(req.params.id);
 
     if (!dbUser) {
-      return res.status(httpStatus.NOT_FOUND).json('User not found!');
+      return res.status(httpStatus.NOT_FOUND).json('User not found');
     }
 
     return res.status(httpStatus.OK).json(dbUser.toFullJSON());
@@ -70,6 +74,10 @@ export const getById = async (req, res) => {
 };
 
 export const update = async (req, res) => {
+  if (req.user && (req.user._id.toString() !== req.params.id.toString())) {
+    return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
+  }
+
   try {
     const updatedUser = await Users.findOneAndUpdate(
       { _id: req.params.id },
@@ -84,6 +92,10 @@ export const update = async (req, res) => {
 };
 
 export const changePassword = async (req, res) => {
+  if (req.user && (req.user._id.toString() !== req.params.id.toString())) {
+    return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Unauthorized' });
+  }
+
   try {
     const { oldPassword, newPassword } = req.body;
     const dbUser = await Users.findById(req.params.id);
