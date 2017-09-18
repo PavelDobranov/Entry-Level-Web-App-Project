@@ -5,11 +5,19 @@
         <legend class="text-center">Login</legend>
         <div class="form-group">
           <label class="control-label" for="nicknameInput">Nickname</label>
-          <input ng-model="$ctrl.credentials.nickname" class="form-control" id="nicknameInput" type="text" placeholder="Enter your nickname">
+          <input ng-model="$ctrl.data.nickname" class="form-control" id="nicknameInput" type="text" placeholder="Enter your nickname">
         </div>
         <div class="form-group">
           <label class="control-label" for="passwordInput">Password</label>
-          <input ng-model="$ctrl.credentials.password" class="form-control" id="passwordInput" type="password" placeholder="Enter your password">
+          <input ng-model="$ctrl.data.password" class="form-control" id="passwordInput" type="password" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="$ctrl.data.remember">
+              Remember me
+            </label>
+          </div>
         </div>
         <div class="form-group">
           <dutton ng-click="$ctrl.loginUser();" class="btn btn-success btn-lg btn-block">Login</dutton>

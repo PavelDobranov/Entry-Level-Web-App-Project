@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import ngMessages from 'angular-messages';
 import localStorage from 'angular-local-storage';
+import sessionStorage from 'angular-sessionstorage';
 import cgNotify from '@cgross/angular-notify';
 import '@cgross/angular-notify/dist/angular-notify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,7 +18,7 @@ import { routes, hooks } from './app.module.config';
 import '../css/app.css';
 
 export default angular
-  .module('app', [uiRouter, ngMessages, cgNotify, localStorage, usersModule])
+  .module('app', [uiRouter, ngMessages, localStorage, sessionStorage, cgNotify, usersModule])
   .component('main', mainComponent)
   .component('home', homeComponent)
   .component('appHeader', appHeaderComponent)

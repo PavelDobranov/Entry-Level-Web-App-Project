@@ -1,14 +1,26 @@
 export default class IdentityService {
-  constructor(localStorageService) {
+  constructor(localStorageService, $sessionStorage) {
     this.localStorageService = localStorageService;
+    this.$sessionStorage = $sessionStorage;
   }
 
   setLoggedUser(user) {
-    this.localStorageService.set('user', user);
+    if (this.getRememberMe()) {
+      console.log('remember me')
+      this.$sessionStorage.remove('user')
+      this.localStorageService.set('user', user);
+    } else {
+      this.localStorageService.remove('user')
+      this.$sessionStorage.putObject('user', user);
+    }
   }
 
   getLoggedUser() {
-    return this.localStorageService.get('user');
+    if (this.getRememberMe()) {
+      return this.localStorageService.get('user');
+    } else {
+      return this.$sessionStorage.getObject('user');
+    }
   }
 
   updateLoggedUser(newUser) {
@@ -23,5 +35,14 @@ export default class IdentityService {
 
   removeLoggedUser() {
     this.localStorageService.remove('user');
+    this.$sessionStorage.remove('user');
+  }
+
+  setRememberMe(value) {
+    this.localStorageService.set('remember', value);
+  }
+
+  getRememberMe() {
+    return this.localStorageService.get('remember');
   }
 }

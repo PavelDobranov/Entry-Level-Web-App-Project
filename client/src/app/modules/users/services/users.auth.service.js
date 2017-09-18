@@ -31,7 +31,7 @@ export default class AuthService {
     return deferred.promise;
   }
 
-  login(credentials) {
+  login({ remember, ...credentials }) {
     const loginEndpoint = `${this.apiUrl}/login`;
     const deferred = this.$q.defer();
 
@@ -40,6 +40,7 @@ export default class AuthService {
       .then((response) => {
         const { data: user } = response;
 
+        this.identityService.setRememberMe(remember);
         this.identityService.setLoggedUser(user);
         this.$http.defaults.headers.common.Authorization = user.token;
 
