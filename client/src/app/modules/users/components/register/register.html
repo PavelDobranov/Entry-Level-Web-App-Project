@@ -89,11 +89,15 @@
                  class="form-control"
                  ng-model="$ctrl.user.phone"
                  ng-pattern="/^(?:[1-9]\d*|0)$/"
+                 ng-minlength="6"
+                 ng-maxlength="15"
                  required
                  placeholder="Enter your phone number">
           <div class="text-danger" ng-messages="registerForm.phone.$error" ng-show="registerForm.phone.$touched">
             <div ng-message="required">Phone number is required</div>
             <div ng-message="pattern">Phone number must contain only digits [0-9] and cannot start with 0</div>
+            <div ng-message="minlength">Phone number must be at least 6 digits</div>
+            <div ng-message="maxlength">You have entered more than the maximum 15 digits</div>
           </div>
         </div>
         <div class="form-group">
