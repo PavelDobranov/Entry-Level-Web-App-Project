@@ -3,67 +3,98 @@
     <form novalidate name="registerForm" class="form-horizontal">
       <fieldset>
         <legend class="text-center">Create new account</legend>
-        <div class="form-group"
-             ng-class="{ 'has-error': !registerForm.nickname.$valid && registerForm.nickname.$touched,
-                         'has-success': registerForm.nickname.$valid && registerForm.nickname.$touched }">
-          <label class="control-label" for="nicknameInput">Nickname</label>
+        <div class="form-group" ng-class="{ 'has-error': !registerForm.nickname.$valid && registerForm.nickname.$touched }">
+          <label class="control-label" for="nicknameInput">
+            Nickname
+            <span class="text-danger">*</span>
+          </label>
           <input type="text"
                  id="nicknameInput"
                  name="nickname"
                  class="form-control"
                  ng-model="$ctrl.user.nickname"
-                 ng-required="true"
                  ng-minlength="3"
                  ng-maxlength="40"
+                 required
                  placeholder="Pick a nickname">
+          <div class="text-danger" ng-messages="registerForm.nickname.$error" ng-show="registerForm.nickname.$touched">
+            <div ng-message="required">Nickname is required</div>
+            <div ng-message="minlength">Please enter at least 3 characters</div>
+            <div ng-message="maxlength">You have entered more than the maximum 40 characters</div>
+          </div>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !registerForm.email.$valid && registerForm.email.$touched,
-                         'has-success': registerForm.email.$valid && registerForm.email.$touched }">
-          <label class="control-label" for="emailInput">Email</label>
+        <div class="form-group" ng-class="{ 'has-error': !registerForm.email.$valid && registerForm.email.$touched }">
+          <label class="control-label" for="emailInput">
+            Email
+            <span class="text-danger">*</span>
+          </label>
           <input type="email"
                  id="emailInput"
                  name="email"
                  class="form-control"
                  ng-model="$ctrl.user.email"
-                 ng-required="true"
+                 required
                  placeholder="you@example.com">
+          <div class="text-danger" ng-messages="registerForm.email.$error" ng-show="registerForm.email.$touched">
+            <div ng-message="required">Email is required</div>
+            <div ng-message="email">Please enter a valid email address</div>
+          </div>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !registerForm.password.$valid && registerForm.password.$touched,
-                         'has-success': registerForm.password.$valid && registerForm.password.$touched }">
-          <label class="control-label" for="passwordInput">Password</label>
+        <div class="form-group" ng-class="{ 'has-error': !registerForm.password.$valid && registerForm.password.$touched }">
+          <label class="control-label" for="passwordInput">
+            Password
+            <span class="text-danger">*</span>
+          </label>
           <input type="password"
                  id="passwordInput"
                  name="password"
                  class="form-control"
                  ng-model="$ctrl.user.password"
-                 ng-required="true"
+                 ng-minlength="6"
+                 ng-maxlength="40"
+                 required
                  placeholder="Creat a password">
+          <div class="text-danger" ng-messages="registerForm.password.$error" ng-show="registerForm.password.$touched">
+            <div ng-message="required">Password is required</div>
+            <div ng-message="minlength">Please enter at least 6 characters</div>
+            <div ng-message="maxlength">You have entered more than the maximum 40 characters</div>
+          </div>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !registerForm.confirmPassword.$valid && registerForm.confirmPassword.$touched,
-                         'has-success': registerForm.confirmPassword.$valid && registerForm.confirmPassword.$touched }">
-          <label class="control-label" for="confirmPasswordInput">Confirm password</label>
+        <div class="form-group" ng-class="{ 'has-error': !registerForm.confirmPassword.$valid && registerForm.confirmPassword.$touched }">
+          <label class="control-label" for="confirmPasswordInput">
+            Confirm password
+            <span class="text-danger">*</span>
+          </label>
           <input type="password"
                  id="confirmPasswordInput"
                  name="confirmPassword"
                  class="form-control"
                  ng-model="$ctrl.user.confirmPassword"
-                 ng-required="true"
+                 ng-pattern="{{ $ctrl.user.password }}"
+                 required
                  placeholder="Confirm your password">
+          <div class="text-danger" ng-messages="registerForm.confirmPassword.$error" ng-show="registerForm.confirmPassword.$touched">
+            <div ng-message="required">Confirm password is required</div>
+            <div ng-message="pattern">Passwords do not match</div>
+          </div>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !registerForm.phone.$valid && registerForm.phone.$touched,
-                         'has-success': registerForm.phone.$valid && registerForm.phone.$touched }">
-          <label class="control-label" for="phoneInput">Phone</label>
-          <input type="number"
+        <div class="form-group" ng-class="{ 'has-error': !registerForm.phone.$valid && registerForm.phone.$touched }">
+          <label class="control-label" for="phoneInput">
+            Phone
+            <span class="text-danger">*</span>
+          </label>
+          <input type="text"
                  id="phoneInput"
                  name="phone"
                  class="form-control"
                  ng-model="$ctrl.user.phone"
-                 ng-required="true"
+                 ng-pattern="/^(?:[1-9]\d*|0)$/"
+                 required
                  placeholder="Enter your phone number">
+          <div class="text-danger" ng-messages="registerForm.phone.$error" ng-show="registerForm.phone.$touched">
+            <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Phone number must contain only digits [0-9] and cannot start with 0</div>
+          </div>
         </div>
         <div class="form-group">
           <dutton ng-click="$ctrl.registerUser();"

@@ -17,8 +17,6 @@ class RegisterController {
   }
 
   registerUser() {
-    // TODO: validate
-
     this.authService
       .register(this.user)
       .then(console.log);

@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngMessages from 'angular-messages';
 import localStorage from 'angular-local-storage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,7 +13,7 @@ import { routes, hooks } from './app.module.config';
 import '../css/app.css';
 
 export default angular
-  .module('app', [uiRouter, localStorage, usersModule])
+  .module('app', [uiRouter, ngMessages, localStorage, usersModule])
   .component('main', mainComponent)
   .component('home', homeComponent)
   .component('appHeader', appHeaderComponent)
