@@ -7,11 +7,21 @@ export default class IdentityService {
     this.localStorageService.set('user', user);
   }
 
-  removeLoggedUser() {
-    this.localStorageService.remove('user');
-  }
-
   getLoggedUser() {
     return this.localStorageService.get('user');
+  }
+
+  updateLoggedUser(newUser) {
+    const user = this.localStorageService.get('user')
+
+    Object.keys(newUser).forEach((key) => {
+      user[key] = newUser[key];
+    });
+
+    this.localStorageService.set('user', user);
+  }
+
+  removeLoggedUser() {
+    this.localStorageService.remove('user');
   }
 }

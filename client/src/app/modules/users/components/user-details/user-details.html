@@ -40,16 +40,12 @@
                  ng-required="true">
         </div>
         <div class="form-group">
-          <dutton ng-click="$ctrl.updateUser();"
-                  ng-disabled="userDetailsForm.$invalid"
-                  class="btn btn-success">
+          <dutton ng-click="$ctrl.updateUser();" ng-disabled="userDetailsForm.$invalid" class="btn btn-success">
             Update User
           </dutton>
-          <dutton ng-click="$ctrl.registerUser();"
-                  ng-disabled="userDetailsForm.$invalid"
-                  class="btn btn-link pull-right">
+          <a ng-href="/user/{{$ctrl.userId}}/change-password" ng-disabled="userDetailsForm.$invalid" class="btn btn-link pull-right">
             Change Password
-          </dutton>
+          </a>
         </div>
       </fieldset>
     </form>

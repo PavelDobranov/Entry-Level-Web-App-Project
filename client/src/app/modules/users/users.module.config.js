@@ -14,5 +14,10 @@ export default ($stateProvider) => {
       url: '/user/:id',
       component: 'userDetails',
       authenticate: true
+    })
+    .state('changePassword', {
+      url: '/user/:id/change-password',
+      component: 'changePassword',
+      authenticate: true
     });
 };

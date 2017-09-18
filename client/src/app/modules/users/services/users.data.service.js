@@ -1,8 +1,8 @@
 export default class UsersDataService {
-  constructor($http, $q, localStorageService, apiUrl) {
+  constructor($http, $q, identityService, apiUrl) {
     this.$http = $http;
     this.$q = $q;
-    this.localStorageService = localStorageService;
+    this.identityService = identityService;
     this.apiUrl = apiUrl;
   }
 
@@ -27,7 +27,7 @@ export default class UsersDataService {
       .then((response) => {
         const { data: user } = response;
 
-        this.localStorageService.set('user', user);
+        this.identityService.updateLoggedUser(user);
 
         deferred.resolve(user);
       })

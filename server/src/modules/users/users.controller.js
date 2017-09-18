@@ -17,6 +17,10 @@ export const validations = {
       nickname: joi.string().min(3).max(40),
       phone: joi.number().integer()
     }
+  },
+  changePassword: {
+    oldPassword: joi.string().required(),
+    newPassword: joi.string().min(6).max(40)
   }
 };
 
@@ -33,7 +37,6 @@ export const create = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { nickname, password } = req.body;
-
     const dbUser = await Users.findOne({ nickname });
 
     if (!dbUser) {
@@ -70,7 +73,27 @@ export const update = async (req, res) => {
   try {
     const updatedUser = await Users.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
 
-    return res.status(httpStatus.OK).json(updatedUser);
+    return res.status(httpStatus.OK).json(updatedUser.toFullJSON());
+  } catch (error) {
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword } = req.body;
+    const dbUser = await Users.findById(req.params.id);
+
+    if (!dbUser.authenticate(oldPassword)) {
+      return res.status(httpStatus.UNAUTHORIZED).json('Passwords did not match!');
+    }
+
+    dbUser.password = newPassword;
+
+    const updatedUser = await dbUser.save();
+    const token = `JWT ${dbUser.createToken()}`;
+
+    return res.status(httpStatus.OK).json({ ...updatedUser.toJSON(), token });
   } catch (error) {
     return res.status(httpStatus.BAD_REQUEST).json(error);
   }

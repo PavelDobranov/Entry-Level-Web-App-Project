@@ -46,4 +46,23 @@ export default class AuthService {
 
     return deferred.promise;
   }
+
+  changePassword(userId, oldPassword, newPassword) {
+    const loginEndpoint = `${this.apiUrl}/${userId}/change-password`;
+    const deferred = this.$q.defer();
+
+    this.$http
+      .put(loginEndpoint, { oldPassword, newPassword })
+      .then((response) => {
+        const { data: user } = response;
+
+        this.identityService.setLoggedUser(user);
+        this.$http.defaults.headers.common.Authorization = user.token;
+
+        deferred.resolve(user);
+      })
+      .catch(deferred.reject);
+
+    return deferred.promise;
+  }
 }
