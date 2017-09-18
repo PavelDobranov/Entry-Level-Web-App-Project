@@ -97,6 +97,15 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label">
+            Country
+            <span class="text-danger">*</span>
+          </label>
+          <select class="form-control" ng-model="$ctrl.user.country" required>
+            <option ng-repeat="country in $ctrl.countries track by $index" value="{{ ::country._id }}">{{ ::country.name }}</option>
+          </select>
+        </div>
+        <div class="form-group">
           <dutton ng-click="$ctrl.registerUser(registerForm.$valid);" ng-disabled="registerForm.$invalid" class="btn btn-success btn-lg btn-block">
             Create Account
           </dutton>

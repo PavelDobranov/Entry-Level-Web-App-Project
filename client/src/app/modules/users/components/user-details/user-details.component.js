@@ -1,16 +1,19 @@
 import templateUrl from './user-details.html';
 
 class UserDetailsController {
-  constructor($stateParams, usersDataService) {
+  constructor($stateParams, $q, countriesDataService, usersDataService) {
     this.userId = $stateParams.id;
+    this.$q = $q;
+    this.countriesDataService = countriesDataService;
     this.usersDataService = usersDataService;
   }
 
   $onInit() {
-    this.usersDataService
-      .getUser(this.userId)
-      .then((user) => this.user = user)
-      .catch(error => console.log);
+    this.$q.all([this.usersDataService.getUser(this.userId), this.countriesDataService.getAll()])
+      .then(([user, countries]) => {
+        this.user = user;
+        this.countries = countries;
+      });
   }
 
   updateUser() {

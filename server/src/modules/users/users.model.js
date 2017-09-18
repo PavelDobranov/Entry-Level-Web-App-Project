@@ -28,6 +28,10 @@ const UserSchema = new Schema({
   phone: {
     type: Number,
     required: true
+  },
+  country: {
+    type: Schema.Types.ObjectId,
+    ref: 'Country'
   }
 }, { timestamps: true });
 
@@ -46,8 +50,8 @@ UserSchema.methods = {
     return jwt.sign({ _id: this._id }, env.jwtSecret);
   },
   toFullJSON() {
-    const { _id, nickname, email, phone } = this;
-    return { _id, nickname, email, phone };
+    const { _id, nickname, email, phone, country } = this;
+    return { _id, nickname, email, phone, country };
   },
   toJSON() {
     const { _id, nickname } = this;

@@ -10,6 +10,7 @@ import mainComponent from './components/main/main.component';
 import homeComponent from './components/home/home.component';
 import appHeaderComponent from './components/app-header/app-header.component';
 import pageNotFoundComponent from './components/page-not-found/page-not-found.component';
+import countriesDataService from './services/app.countriesData.service';
 import notifierService from './services/app.notifier.service';
 import usersModule from './modules/users/users.module';
 import { routes, hooks } from './app.module.config';
@@ -21,6 +22,7 @@ export default angular
   .component('home', homeComponent)
   .component('appHeader', appHeaderComponent)
   .component('pageNotFound', pageNotFoundComponent)
+  .service('countriesDataService', countriesDataService)
   .service('notifierService', notifierService)
   .config(routes)
   .run(hooks)

@@ -5,39 +5,61 @@
         <legend class="text-center">
           <img ng-src="./img/user-avatar.png" alt="user-avatar">
         </legend>
-        <div class="form-group"
-             ng-class="{ 'has-error': !userDetailsForm.nickname.$valid && userDetailsForm.nickname.$touched,
-                         'has-success': userDetailsForm.nickname.$valid && userDetailsForm.nickname.$touched }">
-          <label class="control-label" for="nicknameInput">Nickname</label>
+        <div class="form-group" ng-class="{ 'has-error': !userDetailsForm.nickname.$valid && userDetailsForm.nickname.$touched  }">
+          <label class="control-label" for="nicknameInput">
+            Nickname
+            <span class="text-danger">*</span>
+          </label>
           <input type="text"
                  id="nicknameInput"
                  name="nickname"
                  class="form-control"
                  ng-model="$ctrl.user.nickname"
-                 ng-required="true"
                  ng-minlength="3"
-                 ng-maxlength="40">
+                 ng-maxlength="40"
+                 required>
+          <div class="text-danger" ng-messages="userDetailsForm.nickname.$error" ng-show="userDetailsForm.nickname.$touched">
+            <div ng-message="required">Nickname is required</div>
+            <div ng-message="minlength">Please enter at least 3 characters</div>
+            <div ng-message="maxlength">You have entered more than the maximum 40 characters</div>
+          </div>
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !userDetailsForm.email.$valid && userDetailsForm.email.$touched,
-                         'has-success': userDetailsForm.email.$valid && userDetailsForm.email.$touched }">
-          <label class="control-label" for="emailInput">Email</label>
+        <div class="form-group" ng-class="{ 'has-error': !userDetailsForm.email.$valid && userDetailsForm.email.$touched }">
+          <label class="control-label" for="emailInput">
+            Email
+            <span class="text-danger">*</span>
+          </label>
           <input type="email"
                  name="email"
                  class="form-control"
-                 ng-model="$ctrl.user.email"
+                 ng-model="::$ctrl.user.email"
                  ng-disabled="true">
         </div>
-        <div class="form-group"
-             ng-class="{ 'has-error': !userDetailsForm.phone.$valid && userDetailsForm.phone.$touched,
-                         'has-success': userDetailsForm.phone.$valid && userDetailsForm.phone.$touched }">
-          <label class="control-label" for="phoneInput">Phone</label>
+        <div class="form-group" ng-class="{ 'has-error': !userDetailsForm.phone.$valid && userDetailsForm.phone.$touched }">
+          <label class="control-label" for="phoneInput">
+            Phone
+            <span class="text-danger">*</span>
+          </label>
           <input type="number"
                  id="phoneInput"
                  name="phone"
                  class="form-control"
                  ng-model="$ctrl.user.phone"
-                 ng-required="true">
+                 ng-pattern="/^(?:[1-9]\d*|0)$/"
+                 required>
+          <div class="text-danger" ng-messages="userDetailsForm.phone.$error" ng-show="userDetailsForm.phone.$touched">
+            <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Phone number must contain only digits [0-9] and cannot start with 0</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">
+            Country
+            <span class="text-danger">*</span>
+          </label>
+          <select class="form-control" ng-model="$ctrl.user.country" required>
+            <option ng-repeat="country in $ctrl.countries track by $index" value="{{ ::country._id }}">{{ ::country.name }}</option>
+          </select>
         </div>
         <div class="form-group">
           <dutton ng-click="$ctrl.updateUser();" ng-disabled="userDetailsForm.$invalid" class="btn btn-success">
