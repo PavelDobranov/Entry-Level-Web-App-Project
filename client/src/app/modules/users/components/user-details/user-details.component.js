@@ -24,7 +24,7 @@ class UserDetailsController {
         const { _id, nickname } = user;
         this.mainComponent.setUser({ _id, nickname });
 
-        this.notifier.success('Your profile has been successfully updated')
+        this.notifier.success('Your profile has been successfully updated');
       })
       .catch((error) => this.notifier.error(error.message));
   }

@@ -7,7 +7,7 @@ export default class UsersDataService {
   }
 
   getUser(userId) {
-    const getUserEndpoint = `${this.apiUrl}/${userId}`;
+    const getUserEndpoint = `${this.apiUrl}/users/${userId}`;
     const deferred = this.$q.defer();
 
     this.$http
@@ -19,7 +19,7 @@ export default class UsersDataService {
   }
 
   updateUser(userId, updatedUser) {
-    const updateUserendpoint = `${this.apiUrl}/${userId}`;
+    const updateUserendpoint = `${this.apiUrl}/users/${userId}`;
     const deferred = this.$q.defer();
 
     this.$http
@@ -34,9 +34,7 @@ export default class UsersDataService {
       .catch((response) => {
         if (response.data.errors) {
           const errors = response.data.errors;
-          const message = Object.keys(errors).map((key) => {
-            return `${errors[key].path} ${errors[key].message}`;
-          });
+          const message = Object.keys(errors).map((key) => `${errors[key].path} ${errors[key].message}`);
 
           return deferred.reject({ message });
         }

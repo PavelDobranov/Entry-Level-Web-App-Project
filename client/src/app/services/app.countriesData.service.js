@@ -1,11 +1,12 @@
 export default class CountriesDataService {
-  constructor($http, $q) {
+  constructor($http, $q, apiUrl) {
     this.$http = $http;
     this.$q = $q;
+    this.apiUrl = apiUrl;
   }
 
   getAll() {
-    const getAllEndpoint = `http://localhost:3030/api/countries`;
+    const getAllEndpoint = `${this.apiUrl}/countries`;
     const deferred = this.$q.defer();
 
     this.$http

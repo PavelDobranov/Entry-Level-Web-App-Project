@@ -7,7 +7,7 @@ export default class AuthService {
   }
 
   register(user) {
-    const registerEnpoint = `${this.apiUrl}/register`;
+    const registerEnpoint = `${this.apiUrl}/users/register`;
     const deferred = this.$q.defer();
 
     this.$http
@@ -20,9 +20,7 @@ export default class AuthService {
       .catch((response) => {
         if (response.data.errors) {
           const errors = response.data.errors;
-          const message = Object.keys(errors).map((key) => {
-            return `${errors[key].path} ${errors[key].message}`;
-          });
+          const message = Object.keys(errors).map((key) => `${errors[key].path} ${errors[key].message}`);
 
           return deferred.reject({ message });
         }
@@ -34,7 +32,7 @@ export default class AuthService {
   }
 
   login({ remember, ...credentials }) {
-    const loginEndpoint = `${this.apiUrl}/login`;
+    const loginEndpoint = `${this.apiUrl}/users/login`;
     const deferred = this.$q.defer();
 
     this.$http
@@ -64,7 +62,7 @@ export default class AuthService {
   }
 
   changePassword(userId, oldPassword, newPassword) {
-    const loginEndpoint = `${this.apiUrl}/${userId}/change-password`;
+    const loginEndpoint = `${this.apiUrl}/users/${userId}/change-password`;
     const deferred = this.$q.defer();
 
     this.$http

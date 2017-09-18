@@ -16,7 +16,10 @@ class ChangePasswordController {
     if (validForm) {
       this.authService
         .changePassword(this.userId, this.passwords.old, this.passwords.new)
-        .then(() => this.notifier.success('Your password has been successfully updated'))
+        .then(() => {
+          this.notifier.success('Your password has been successfully updated');
+          this.$state.transitionTo('userDetails', { id: this.userId });
+        })
         .catch((error) => this.notifier.error(error.message));
     }
   }

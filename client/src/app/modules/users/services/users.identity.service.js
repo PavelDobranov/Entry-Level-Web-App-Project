@@ -17,9 +17,9 @@ export default class IdentityService {
   getLoggedUser() {
     if (this.getRememberMe()) {
       return this.localStorageService.get('user');
-    } else {
-      return this.$sessionStorage.getObject('user');
     }
+
+    return this.$sessionStorage.getObject('user');
   }
 
   updateLoggedUser(newUser) {

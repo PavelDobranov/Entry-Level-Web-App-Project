@@ -25,7 +25,7 @@ class MainController {
       .logout()
       .then(() => {
         this.user = null;
-        this.$state.go('login')
+        this.$state.transitionTo('login');
       });
   }
 }

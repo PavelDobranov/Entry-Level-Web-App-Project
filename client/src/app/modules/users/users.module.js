@@ -1,3 +1,4 @@
+import angular from 'angular';
 import registerComponent from './components/register/register.component';
 import loginComponent from './components/login/login.component';
 import userDetailsComponent from './components/user-details/user-details.component';
@@ -17,5 +18,4 @@ export default angular
   .service('usersDataService', usersDataService)
   .service('identityService', identityService)
   .config(usersConfig)
-  .constant('apiUrl', 'http://localhost:3030/api/users')
   .name;

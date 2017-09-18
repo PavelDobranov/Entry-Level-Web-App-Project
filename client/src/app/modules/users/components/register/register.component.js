@@ -15,11 +15,13 @@ class RegisterController {
       confirmPassword: '',
       email: '',
       phone: ''
-    }
+    };
 
     this.countriesDataService
       .getAll()
-      .then((countries) => this.countries = countries);
+      .then((countries) => {
+        this.countries = countries;
+      });
   }
 
   registerUser(validForm) {

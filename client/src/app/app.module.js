@@ -27,4 +27,5 @@ export default angular
   .service('notifierService', notifierService)
   .config(routes)
   .run(hooks)
+  .constant('apiUrl', 'http://localhost:3030/api')
   .name;
