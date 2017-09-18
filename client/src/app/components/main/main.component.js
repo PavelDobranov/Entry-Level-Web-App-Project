@@ -26,8 +26,7 @@ class MainController {
       .then(() => {
         this.user = null;
         this.$state.go('login')
-      })
-      .catch(console.log);
+      });
   }
 }
 

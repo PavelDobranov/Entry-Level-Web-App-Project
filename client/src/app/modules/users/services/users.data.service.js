@@ -31,7 +31,18 @@ export default class UsersDataService {
 
         deferred.resolve(user);
       })
-      .catch(deferred.reject);
+      .catch((response) => {
+        if (response.data.errors) {
+          const errors = response.data.errors;
+          const message = Object.keys(errors).map((key) => {
+            return `${errors[key].path} ${errors[key].message}`;
+          });
+
+          return deferred.reject({ message });
+        }
+
+        return deferred.reject(response);
+      });
 
     return deferred.promise;
   }

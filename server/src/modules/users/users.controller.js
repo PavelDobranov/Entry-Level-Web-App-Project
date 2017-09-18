@@ -40,11 +40,11 @@ export const login = async (req, res) => {
     const dbUser = await Users.findOne({ nickname });
 
     if (!dbUser) {
-      return res.status(httpStatus.NOT_FOUND).json('User not found!');
+      return res.status(httpStatus.NOT_FOUND).json({ message: 'You have entered an invalid username or password' });
     }
 
     if (!dbUser.authenticate(password)) {
-      return res.status(httpStatus.BAD_REQUEST).json('Passwords did not match!');
+      return res.status(httpStatus.BAD_REQUEST).json({ message: 'You have entered an invalid username or password' });
     }
 
     const token = `JWT ${dbUser.createToken()}`;
@@ -71,7 +71,11 @@ export const getById = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const updatedUser = await Users.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
+    const updatedUser = await Users.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true, runValidators: true, context: 'query' }
+    );
 
     return res.status(httpStatus.OK).json(updatedUser.toFullJSON());
   } catch (error) {
@@ -85,7 +89,7 @@ export const changePassword = async (req, res) => {
     const dbUser = await Users.findById(req.params.id);
 
     if (!dbUser.authenticate(oldPassword)) {
-      return res.status(httpStatus.UNAUTHORIZED).json('Passwords did not match!');
+      return res.status(httpStatus.UNAUTHORIZED).json({ message: 'Please enter valid \"Old Password\"' });
     }
 
     dbUser.password = newPassword;

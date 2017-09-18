@@ -19,10 +19,12 @@ export default class AuthService {
       .then(deferred.resolve)
       .catch((response) => {
         if (response.data.errors) {
-          const errorKey = Object.keys(response.data.errors)[0];
-          const error = response.data.errors[errorKey];
+          const errors = response.data.errors;
+          const message = Object.keys(errors).map((key) => {
+            return `${errors[key].path} ${errors[key].message}`;
+          });
 
-          return deferred.reject(error.message);
+          return deferred.reject({ message });
         }
 
         return deferred.reject(response);
@@ -46,7 +48,7 @@ export default class AuthService {
 
         deferred.resolve(user);
       })
-      .catch(deferred.reject);
+      .catch((response) => deferred.reject(response.data));
 
     return deferred.promise;
   }
@@ -75,7 +77,7 @@ export default class AuthService {
 
         deferred.resolve(user);
       })
-      .catch(response => deferred.reject(response.data));
+      .catch((response) => deferred.reject(response.data));
 
     return deferred.promise;
   }

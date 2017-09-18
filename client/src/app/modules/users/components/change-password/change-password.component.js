@@ -1,10 +1,11 @@
 import templateUrl from './change-password.html';
 
 class ChangePasswordController {
-  constructor($state, $stateParams, authService) {
+  constructor($state, $stateParams, authService, notifierService) {
     this.$state = $state;
     this.userId = $stateParams.id;
     this.authService = authService;
+    this.notifier = notifierService;
   }
 
   $onInit() {
@@ -15,7 +16,8 @@ class ChangePasswordController {
     if (validForm) {
       this.authService
         .changePassword(this.userId, this.passwords.old, this.passwords.new)
-        .then();
+        .then(() => this.notifier.success('Your password has been successfully updated'))
+        .catch((error) => this.notifier.error(error.message));
     }
   }
 }

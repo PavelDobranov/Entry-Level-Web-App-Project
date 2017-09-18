@@ -32,7 +32,7 @@ class RegisterController {
           this.mainComponent.setUser({ _id, nickname });
           this.$state.transitionTo('home');
         })
-        .catch((error) => this.notifier.error(error));
+        .catch((error) => this.notifier.error(error.message));
     }
   }
 }

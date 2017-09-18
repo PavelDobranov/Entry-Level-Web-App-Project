@@ -6,11 +6,10 @@ export default class IdentityService {
 
   setLoggedUser(user) {
     if (this.getRememberMe()) {
-      console.log('remember me')
-      this.$sessionStorage.remove('user')
+      this.$sessionStorage.remove('user');
       this.localStorageService.set('user', user);
     } else {
-      this.localStorageService.remove('user')
+      this.localStorageService.remove('user');
       this.$sessionStorage.putObject('user', user);
     }
   }
@@ -24,13 +23,13 @@ export default class IdentityService {
   }
 
   updateLoggedUser(newUser) {
-    const user = this.localStorageService.get('user')
+    const user = this.getLoggedUser();
 
     Object.keys(newUser).forEach((key) => {
       user[key] = newUser[key];
     });
 
-    this.localStorageService.set('user', user);
+    this.setLoggedUser(user);
   }
 
   removeLoggedUser() {
