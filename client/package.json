@@ -6,8 +6,9 @@
   "author": "Pavel Dobranov <pdobranov@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev:build": "webpack",
-    "dev": "webpack-dev-server -d --progress --colors --inline --hot --open --content-base bin/"
+    "dev:build": "webpack -w",
+    "dev": "webpack-dev-server -d --progress --colors --inline --hot --open --content-base bin/",
+    "build": "webpack"
   },
   "dependencies": {
     "@cgross/angular-notify": "^2.5.1",

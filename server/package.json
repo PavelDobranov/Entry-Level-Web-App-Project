@@ -8,8 +8,9 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "dev:build": "npm run clean && webpack",
-    "dev": "cross-env NODE_ENV=development nodemon dist/index.bundle.js"
+    "dev:build": "npm run clean && webpack -w",
+    "dev": "cross-env NODE_ENV=development nodemon dist/index.bundle.js",
+    "build": "npm run clean && webpack"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
