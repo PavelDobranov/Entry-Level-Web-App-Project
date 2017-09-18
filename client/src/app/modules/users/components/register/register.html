@@ -97,9 +97,7 @@
           </div>
         </div>
         <div class="form-group">
-          <dutton ng-click="$ctrl.registerUser();"
-                  ng-disabled="registerForm.$invalid"
-                  class="btn btn-success btn-lg btn-block">
+          <dutton ng-click="$ctrl.registerUser(registerForm.$valid);" ng-disabled="registerForm.$invalid" class="btn btn-success btn-lg btn-block">
             Create Account
           </dutton>
         </div>

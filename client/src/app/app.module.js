@@ -10,8 +10,8 @@ import mainComponent from './components/main/main.component';
 import homeComponent from './components/home/home.component';
 import appHeaderComponent from './components/app-header/app-header.component';
 import pageNotFoundComponent from './components/page-not-found/page-not-found.component';
+import notifierService from './services/app.notifier.service';
 import usersModule from './modules/users/users.module';
-import notifierService from './services/users.notifier.service';
 import { routes, hooks } from './app.module.config';
 import '../css/app.css';
 

@@ -12,8 +12,21 @@ export default class AuthService {
 
     this.$http
       .post(registerEnpoint, user)
+      .then(() => {
+        const { nickname, password } = user;
+        return this.login({ nickname, password });
+      })
       .then(deferred.resolve)
-      .catch(deferred.reject);
+      .catch((response) => {
+        if (response.data.errors) {
+          const errorKey = Object.keys(response.data.errors)[0];
+          const error = response.data.errors[errorKey];
+
+          return deferred.reject(error.message);
+        }
+
+        return deferred.reject(response);
+      });
 
     return deferred.promise;
   }
@@ -61,7 +74,7 @@ export default class AuthService {
 
         deferred.resolve(user);
       })
-      .catch(deferred.reject);
+      .catch(response => deferred.reject(response.data));
 
     return deferred.promise;
   }
