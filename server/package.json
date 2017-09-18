@@ -22,6 +22,7 @@
     "joi": "^10.6.0",
     "jsonwebtoken": "^8.0.1",
     "mongoose": "^4.11.11",
+    "mongoose-unique-validator": "^1.0.6",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.0"
   },

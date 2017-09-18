@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { compareSync, hashSync } from 'bcrypt-nodejs';
 import jwt from 'jsonwebtoken';
+import uniqueValidator from 'mongoose-unique-validator';
 
 import env from '../../config/env.config';
 
@@ -8,6 +9,7 @@ const UserSchema = new Schema({
   nickname: {
     type: String,
     required: true,
+    unique: true,
     minlength: 3,
     maxlength: 40
   },
@@ -20,6 +22,7 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
     maxlength: 40
   },
   phone: {
@@ -27,6 +30,10 @@ const UserSchema = new Schema({
     required: true
   }
 }, { timestamps: true });
+
+UserSchema.plugin(uniqueValidator, {
+  message: '{VALUE} already taken!'
+});
 
 UserSchema.methods = {
   _hashPassword(password) {
