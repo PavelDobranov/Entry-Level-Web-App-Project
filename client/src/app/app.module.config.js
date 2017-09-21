@@ -22,14 +22,16 @@ export const hooks = ($transitions, $state, $http, identityService) => {
     $http.defaults.headers.common.Authorization = loggedUser.token;
   }
 
-  $transitions.onStart({ to: (state) => state.self.authenticate }, (transition, state) => {
+  $transitions.onStart({ to: (state) => state.self.authenticate }, (transition) => {
     if (!identityService.getLoggedUser()) {
+      transition.abort();
       return $state.transitionTo('login');
     }
   });
 
-  $transitions.onStart({ to: (state) => state.self.disableWhenAuthenticated }, (transition, state) => {
+  $transitions.onStart({ to: (state) => state.self.disableWhenAuthenticated }, (transition) => {
     if (identityService.getLoggedUser()) {
+      transition.abort();
       return $state.transitionTo('pageNotFound');
     }
   });
